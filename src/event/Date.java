@@ -1,31 +1,31 @@
 package event;
 
 public class Date {
-    private Hour hour;
+    private Time hour;
     private Day day;
-    private Hour duration;
+    private Time duration;
     private Locale locale;
 
-    public Date(Hour hour, Day day, Hour duration, Locale locale) {
+    public Date(Hour hour, Day day, Period duration, Locale locale) {
         this.hour = hour;
         this.day = day;
         this.duration = duration;
         this.locale = locale;
     }
-    public Date(Hour hour, Day day, Hour duration) {
+    public Date(Time hour, Day day, Time duration) {
         this.hour = hour;
         this.day = day;
         this.duration = duration;
     }
     
-    public Hour getHour(){
+    public Time getHour(){
         return hour;
     }
 
     /**
      * @param hour the hour to set
      */
-    public void setHour(Hour hour) {
+    public void setHour(Time hour) {
         this.hour = hour;
     }
 
@@ -46,14 +46,14 @@ public class Date {
     /**
      * @return the duration
      */
-    public Hour getDuration() {
+    public Time getDuration() {
         return duration;
     }
 
     /**
      * @param duration the duration to set
      */
-    public void setDuration(Hour duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
     }
 
