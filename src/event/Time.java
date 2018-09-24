@@ -4,7 +4,7 @@ package event;
 /*
 * the hour is in 24 format
  */
-public class Time {
+class Time {
 
     private int hour;
     private int minute;
