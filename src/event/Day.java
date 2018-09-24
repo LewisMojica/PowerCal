@@ -16,6 +16,11 @@ public class Day {
         this.month = month;
         this.year = year;
     }
+    
+    
+    public String toString(){
+        return String.valueOf(day) + "/" + String.valueOf(month) + "/" + String.valueOf(year);
+    }
 
     /**
      * @return the day
