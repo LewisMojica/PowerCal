@@ -3,7 +3,7 @@ package event;
 
 /*
 * the hour is in 24 format
-*/
+ */
 public class Hour {
 
     private int hour;
@@ -12,6 +12,27 @@ public class Hour {
     public Hour(int hour, int minute) {
         this.hour = hour;
         this.minute = minute;
+    }
+
+    public String toStringFormat24() {
+        String out;    //this var will be return
+
+        // convert the hour to String
+        out = String.valueOf(hour) + ":" + String.valueOf(minute);
+        return out;
+    }
+
+    public String toStringFormat12() {
+        String out;     //this var will be return
+        
+            //conver the hour to String but in 12 hours format 
+            if (hour > 12) {
+                out = String.valueOf(hour - 12) + ":" + String.valueOf(minute) + " PM";
+            } else{
+                out = String.valueOf(hour) + ":" + String.valueOf(minute) + "AM";
+            }
+        
+        return out;
     }
 
     /**
