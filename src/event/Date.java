@@ -1,24 +1,44 @@
 package event;
 
 public class Date {
+
     private Time hour;
     private Day day;
     private Time duration;
     private Locale locale;
+    private String name;
 
-    public Date(Hour hour, Day day, Period duration, Locale locale) {
+    /**
+     *
+     * @param name> the name of the event. example: Math class
+     * @param hour> the time that the event starts
+     * @param day> the date of when the event starts (dd,mm.yy)
+     * @param duration> Duration of the events in hours and days
+     * @param locale> location of the event
+     */
+    public Date(String name, Hour hour, Day day, Period duration, Locale locale) {
+        this.name = name;
         this.hour = hour;
         this.day = day;
         this.duration = duration;
         this.locale = locale;
     }
-    public Date(Time hour, Day day, Time duration) {
+
+    /**
+     *
+     * @param name> the name of the event. example: Math class
+     * @param hour> the time that the event starts
+     * @param day> the date of when the event starts (dd,mm.yy)
+     * @param duration> Duration of the events in hours and days
+     */
+    public Date(String name, Hour hour, Day day, Period duration) {
+        this.name = name;
         this.hour = hour;
         this.day = day;
         this.duration = duration;
     }
-    
-    public Time getHour(){
+
+    public Time getHour() {
         return hour;
     }
 
