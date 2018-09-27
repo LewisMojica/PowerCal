@@ -69,7 +69,7 @@ class Methods {
                 + "> ");
         Period duration = stringToPeriod(in.next());
         
-        //se agraga el nuevo evento al array
+        //se agrega el nuevo evento al array
         newEvent(name, hour, day, duration);
         
         System.out.println("Evento < " + name + " >creado");
