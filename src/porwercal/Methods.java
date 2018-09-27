@@ -23,6 +23,21 @@ class Methods {
         do {
             printMainMenu();
             selection = in.nextInt();
+            if (selection != 0) {
+                switch (selection) {
+                    case 1:
+                        menuSelection1();
+                        break;
+                    case 2:
+                        menuSelection2();
+                        break;
+                    case 3:
+                        menuSelection3();
+                        break;
+                    default:
+                        System.out.print(selection + " No es una opcion valida");
+                }
+            }
         } while (selection != 0);
     }
 
@@ -37,5 +52,21 @@ class Methods {
     static void newEvent(String name, Hour hour, Day day, Period duration) {
 
         Event evento = new Event(name, hour, day, duration);
+    }
+
+    private static void swith(int selection) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void menuSelection1() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void menuSelection2() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void menuSelection3() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
