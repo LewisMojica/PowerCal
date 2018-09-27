@@ -92,7 +92,11 @@ class Methods {
 
     //convierte un String del formato hora:minuto a un objeto de tipo Hour
     private static Hour stringToHour(String next) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int colon = next.indexOf(":"); // ubicar la posicion del char :
+        int hour = Integer.parseInt(next.substring(0, colon)); //se guarda el valor numerico de las horas
+        int minutes = Integer.parseInt(next.substring(colon +1)); //se guarda el valor numerico de los minutos
+        return new Hour(hour, minutes);
+        
     }
 
     //convierte un String del formato horas:minutos  a un objeto de tipo Period
