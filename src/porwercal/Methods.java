@@ -54,10 +54,6 @@ class Methods {
         Event evento = new Event(name, hour, day, duration);
     }
 
-    private static void swith(int selection) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     private static void menuSelection1() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
