@@ -22,7 +22,7 @@ class Methods {
     static void initMenu() {
         do {
             printMainMenu();
-            selection = in.nextInt();
+            selection = Integer.parseInt(in.nextLine());
             if (selection != 0) {
                 switch (selection) {
                     case 1:
@@ -55,19 +55,37 @@ class Methods {
     private static void menuSelection1() {
         System.out.print("Ingrese el nombre del nuevo evento\n"
                 + "> ");
-        String name = in.next();
+        String name = in.nextLine().trim();
 
         System.out.print("Ingrese la hora del evento formato: <hora>:<minuto>\n"
                 + "> ");
-        Hour hour = stringToHour(in.next());
+        String test = in.nextLine();
+        while (test.indexOf(" ") != -1){
+            System.out.print("Sin espacios en blanco\n"
+                    + "> ");
+            test = in.nextLine();
+        }
+        Hour hour = stringToHour(test);
 
         System.out.print("Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"
                 + "> ");
-        Day day = stringToDay(in.next());
+        test = in.nextLine();
+        while (test.indexOf(" ") != -1){
+            System.out.print("Sin espacios en blanco\n"
+                    + "> ");
+            test = in.nextLine();
+        }
+        Day day = stringToDay(test);
 
         System.out.print("Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n"
                 + "> ");
-        Period duration = stringToPeriod(in.next());
+        test = in.nextLine();
+        while (test.indexOf(" ") != -1){
+            System.out.print("Sin espacios en blanco\n"
+                    + "> ");
+            test = in.nextLine();
+        }
+        Period duration = stringToPeriod(test);
         
         //se agrega el nuevo evento al array
         newEvent(name, hour, day, duration);
@@ -76,12 +94,6 @@ class Methods {
 
     }
     
-    private static void newEvent(String name, Hour hour, Day day, Period duration) {
-
-        Event evento = new Event(name, hour, day, duration);
-        events_array.add(evento);
-    }
-
     private static void menuSelection2() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -115,6 +127,12 @@ class Methods {
         int month = Integer.parseInt(next.substring(slash_1 + 1, slash_2));//asigna el mes a la variable month
         int year = Integer.parseInt(next.substring(slash_2 + 1));//so on
         return new Day(day, month, year);
+    }
+    
+    private static void newEvent(String name, Hour hour, Day day, Period duration) {
+
+        Event evento = new Event(name, hour, day, duration);
+        events_array.add(evento);
     }
 
 }
