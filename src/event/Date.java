@@ -11,8 +11,6 @@ public class Date {
      *
      * @param hour> the time that the event starts
      * @param day> the date of when the event starts (dd,mm.yy)
-     * @param duration> Duration of the events in hours and days
-     * @param locale> location of the event
      */
     public Date(Hour hour, Day day) {
         this.hour = hour;
