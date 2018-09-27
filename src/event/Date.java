@@ -14,10 +14,9 @@ public class Date {
      * @param duration> Duration of the events in hours and days
      * @param locale> location of the event
      */
-    public Date(Hour hour, Day day, Period duration) {
+    public Date(Hour hour, Day day) {
         this.hour = hour;
         this.day = day;
-        this.duration = duration;
     }
 
     public Time getHour() {
