@@ -15,9 +15,9 @@ import java.util.ArrayList;
  */
 class Methods {
 
-    static ArrayList<Event> events_array = new ArrayList<>();
+    static private ArrayList<Event> events_array = new ArrayList<>();
     static private Scanner in = new Scanner(System.in);
-    static int selection;
+    static private int selection;
 
     static void initMenu() {
         do {
@@ -42,7 +42,7 @@ class Methods {
         } while (selection != 0);
     }
 
-    static void printMainMenu() {
+    private static void printMainMenu() {
         System.out.print("Opciones principales: \n\n"
                 + "-->  0. Salir\n"
                 + "-->  1. Crear nuevo evento\n"
@@ -76,7 +76,7 @@ class Methods {
 
     }
     
-    static void newEvent(String name, Hour hour, Day day, Period duration) {
+    private static void newEvent(String name, Hour hour, Day day, Period duration) {
 
         Event evento = new Event(name, hour, day, duration);
         events_array.add(evento);
@@ -109,7 +109,12 @@ class Methods {
 
     //convierte un String del formato day/mes/year a un objeto de tipo Day
     private static Day stringToDay(String next) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int slash_1 = next.indexOf("/"); //ubacar la posicion de la primera ocurrencia del char '/'
+        int slash_2 = next.indexOf("/", slash_1 + 1);//ubacar la posicion de la segunda ocurrencia del char '/'
+        int day = Integer.parseInt(next.substring(0,slash_1));//asigna el dia a la variable Day
+        int month = Integer.parseInt(next.substring(slash_1 + 1, slash_2));//asigna el mes a la variable month
+        int year = Integer.parseInt(next.substring(slash_2 + 1));//so on
+        return new Day(day, month, year);
     }
 
 }
