@@ -105,15 +105,36 @@ class Methods {
             case 0:
                 break;
             case 1:
-                menuSelection12();
+                menuSelection11();
                 break;
             case 2:
-                menuSelection13();
+                menuSelection12();
+                break;
+            default:
+                System.out.println("< " + selection + " > No es una opcion valida\n"
+                                + "------------------------------");
+                break;
+                
 
         }
     }
 
     private static void menuSelection3() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private static void menuSelection11() {
+        System.out.println("------------------------------");
+        int i = 0;
+        //imprimos todos los nombres de los eventos en una nueva linea, precesido por su posicion
+        for(Event event: events_array){
+            i++;
+            System.out.println( i + "--> " + event.getName());
+        }
+        System.out.println("------------------------------");
+    }
+
+    private static void menuSelection12() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -149,13 +170,4 @@ class Methods {
         Event evento = new Event(name, hour, day, duration);
         events_array.add(evento);
     }
-
-    private static void menuSelection12() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    private static void menuSelection13() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }
