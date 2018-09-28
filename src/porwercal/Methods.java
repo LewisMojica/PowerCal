@@ -21,8 +21,12 @@ class Methods {
     static void initMenu() {
         int selection;
         do {
-            printMainMenu();
-            System.out.print("> ");
+        System.out.print("Opciones principales: \n\n"
+                + "-->  0. Salir\n"
+                + "-->  1. Crear nuevo evento\n"
+                + "-->  2. Ver evento\n"
+                + "-->  3. Eliminar evento (no soportado)\n"
+                + "> ");
             String test_err = in.nextLine();
             while (!isNumeric(test_err)) {
                 System.out.println("***Ah introducido caracteres no validos.\n"
@@ -51,13 +55,7 @@ class Methods {
         } while (selection != 0);
     }
 
-    private static void printMainMenu() {
-        System.out.print("Opciones principales: \n\n"
-                + "-->  0. Salir\n"
-                + "-->  1. Crear nuevo evento\n"
-                + "-->  2. Ver evento\n"
-                + "-->  3. Eliminar evento (no soportado)\n");
-    }
+
 
     private static void menuSelection1() {
         System.out.print("Ingrese el nombre del nuevo evento\n"
@@ -109,7 +107,15 @@ class Methods {
                     + "-->  1. Ver todos los eventos\n"
                     + "-->  2. Ver evento especifico\n"
                     + "> ");
-            selection = Integer.parseInt(in.nextLine());
+            String test_err = in.nextLine();
+            while (!isNumeric(test_err)) {
+                System.out.println("***Ah introducido caracteres no validos.\n"
+                        + "Por favor, lea la lista de opciones y luego escoja una.");
+                System.out.print("> ");
+                test_err = in.nextLine();
+            }
+
+            selection = Integer.parseInt(test_err);
 
             switch (selection) {
                 case 0:
@@ -182,19 +188,16 @@ class Methods {
     }
 
     private static boolean isNumeric(String test) {
-        int checked = 0;
         String numbers = "0123456789";
         for (int i = 0; i < test.length(); i++) {
+            boolean wasNumeric = false;
             for (int e = 0; e < numbers.length(); e++) {
                 if (test.charAt(i) == numbers.charAt(e)) {
-                    checked++;
+                    wasNumeric = true;
                 }
             }
+            if (!wasNumeric) return false;
         }
-        if (checked != test.length()) {
-            return false;
-        } else {
-            return true;
-        }
+        return true;
     }
 }
