@@ -8,6 +8,8 @@ package porwercal;
 import java.util.Scanner;
 import event.*;
 import java.util.ArrayList;
+import java.util.Objects;
+import jdk.jfr.EventType;
 
 /**
  *
@@ -107,10 +109,10 @@ class Methods {
                 case 0:
                     break;
                 case 1:
-                    menuSelection11();
+                    menuSelection21();
                     break;
                 case 2:
-                    menuSelection12();
+                    menuSelection22();
                     break;
                 default:
                     System.out.println("< " + selection + " > No es una opcion valida\n"
@@ -125,7 +127,7 @@ class Methods {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    private static void menuSelection11() {
+    private static void menuSelection21() {
         System.out.println("------------------------------");
         int i = 0;
         //imprimos todos los nombres de los eventos en una nueva linea, precesido por su posicion
@@ -136,8 +138,9 @@ class Methods {
         System.out.println("------------------------------");
     }
 
-    private static void menuSelection12() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private static void menuSelection22() {
+        // getEventByName(in.nextLine()).getName();
+        throw new UnsupportedOperationException("Not supported yet."); //esta funcion esta en progreso de construccion
     }
 
     //convierte un String del formato hora:minuto a un objeto de tipo Hour
@@ -171,5 +174,15 @@ class Methods {
 
         Event evento = new Event(name, hour, day, duration);
         events_array.add(evento);
+    }
+
+    private static Event getEventByName(String name) {
+        Event result;
+        for (Event event : events_array) {
+            if (event.getName().equalsIgnoreCase(name)) {
+                return event;
+            }
+        }
+        return null;
     }
 }
