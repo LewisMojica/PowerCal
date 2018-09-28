@@ -23,7 +23,16 @@ class Methods {
         do {
             printMainMenu();
             System.out.print("> ");
-            selection = Integer.parseInt(in.nextLine());
+            String test_err = in.nextLine();
+            while (!isNumeric(test_err)) {
+                System.out.println("***Ah introducido caracteres no validos.\n"
+                        + "Por favor, lea la lista de opciones y luego escoja una.");
+                System.out.print("> ");
+                test_err = in.nextLine();
+            }
+
+            selection = Integer.parseInt(test_err);
+
             if (selection != 0) {
                 switch (selection) {
                     case 1:
@@ -36,8 +45,7 @@ class Methods {
                         menuSelection3();
                         break;
                     default:
-                        System.out.println("< " + selection + " > No es una opcion valida\n"
-                                + "------------------------------");
+                        System.out.println("\n*** < " + selection + " > No es una opcion valida\n");
                 }
             }
         } while (selection != 0);
@@ -112,9 +120,8 @@ class Methods {
                 break;
             default:
                 System.out.println("< " + selection + " > No es una opcion valida\n"
-                                + "------------------------------");
+                        + "------------------------------");
                 break;
-                
 
         }
     }
@@ -127,9 +134,9 @@ class Methods {
         System.out.println("------------------------------");
         int i = 0;
         //imprimos todos los nombres de los eventos en una nueva linea, precesido por su posicion
-        for(Event event: events_array){
+        for (Event event : events_array) {
             i++;
-            System.out.println( i + "--> " + event.getName());
+            System.out.println(i + "--> " + event.getName());
         }
         System.out.println("------------------------------");
     }
@@ -169,5 +176,22 @@ class Methods {
 
         Event evento = new Event(name, hour, day, duration);
         events_array.add(evento);
+    }
+
+    private static boolean isNumeric(String test) {
+        int checked = 0;
+        String numbers = "0123456789";
+        for (int i = 0; i < test.length(); i++) {
+            for (int e = 0; e < numbers.length(); e++) {
+                if (test.charAt(i) == numbers.charAt(e)) {
+                    checked++;
+                }
+            }
+        }
+        if (checked != test.length()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
