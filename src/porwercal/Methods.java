@@ -139,8 +139,30 @@ class Methods {
     }
 
     private static void menuSelection22() {
-        // getEventByName(in.nextLine()).getName();
-        throw new UnsupportedOperationException("Not supported yet."); //esta funcion esta en progreso de construccion
+        System.out.print("Ingresa el nombre del evento seguido de un '-' y la informacion que deseas visualizar\n"
+                + "Ecribe <*help> para ver la diferentes informaciones que se pueden visualizar\n"
+                + "> ");
+        String input, event_name, event_info_requested;
+        int tag_index; //porsicion del char '-' en el String input
+        int index_event;
+        do {
+            input = in.nextLine();
+            if (input.equals("*help")){
+                //se imprime informacion de ayuda de este menu especifico
+                System.out.print("> ");
+            }
+        } while (input.equals("*help"));
+
+        tag_index = input.indexOf("-"); //buscamos la posicion del char '_'
+
+        event_name = input.substring(0, tag_index).trim(); //extraemos el nombre del evento y lo asignamos a su variable correspondiente
+
+        event_info_requested = input.substring(tag_index + 1).trim();
+
+        index_event = getIndexEventByName(event_name);
+
+        System.out.println(event_name + " -- " + event_info_requested); //solo para probar que se recupero el nombre del evento y la info solicitada
+        System.out.print(getEventInfo(events_array.get(index_event), event_info_requested));
     }
 
     //convierte un String del formato hora:minuto a un objeto de tipo Hour
@@ -176,13 +198,24 @@ class Methods {
         events_array.add(evento);
     }
 
-    private static Event getEventByName(String name) {
+    private static int getIndexEventByName(String name) {
         Event result;
         for (Event event : events_array) {
             if (event.getName().equalsIgnoreCase(name)) {
-                return event;
+                return events_array.indexOf(event);
             }
         }
-        return null;
+        return -1;
+    }
+
+    /*
+    * esta funcion retorna cierta informacion sobre cierto evento
+    * n = nombre
+    * h = hora
+    * d = dia
+    * p = duracion
+     */
+    private static String getEventInfo(Event get, String event_info_requested) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
