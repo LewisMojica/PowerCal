@@ -102,28 +102,31 @@ class Methods {
     }
 
     private static void menuSelection2() {
-        System.out.print("Menu ver evento:\n\n"
-                + "-->  0. Volver a menu principal\n"
-                + "-->  1. Ver todos los eventos\n"
-                + "-->  2. Ver evento especifico\n"
-                + "> ");
-        int selection = Integer.parseInt(in.nextLine());
+        int selection;
+        do {
+            System.out.print("Menu ver evento:\n\n"
+                    + "-->  0. Volver a menu principal\n"
+                    + "-->  1. Ver todos los eventos\n"
+                    + "-->  2. Ver evento especifico\n"
+                    + "> ");
+            selection = Integer.parseInt(in.nextLine());
 
-        switch (selection) {
-            case 0:
-                break;
-            case 1:
-                menuSelection11();
-                break;
-            case 2:
-                menuSelection12();
-                break;
-            default:
-                System.out.println("< " + selection + " > No es una opcion valida\n"
-                        + "------------------------------");
-                break;
+            switch (selection) {
+                case 0:
+                    break;
+                case 1:
+                    menuSelection11();
+                    break;
+                case 2:
+                    menuSelection12();
+                    break;
+                default:
+                    System.out.println("< " + selection + " > No es una opcion valida\n"
+                            + "------------------------------");
+                    break;
 
-        }
+            }
+        } while (selection != 0);
     }
 
     private static void menuSelection3() {
