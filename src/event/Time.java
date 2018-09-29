@@ -34,6 +34,41 @@ public class Time {
         
         return out;
     }
+    public static boolean isTime(String time){
+        int colon_intex = time.indexOf(":");
+        if (colon_intex == -1) return false;
+        
+        if(isNumeric(removeCharByIndex(time, colon_intex))){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    private static String removeCharByIndex(String input, int index){
+        String output = "";
+        if (input.length() - 1 > index){
+            return input.substring(0,index) + input.substring(index + 1);
+        }
+        else {
+            return input.substring(0,index);
+        }
+    }
+
+    private static boolean isNumeric(String test) {
+        String numbers = "0123456789";
+        for (int i = 0; i < test.length(); i++) {
+            boolean wasNumeric = false;
+            for (int e = 0; e < numbers.length(); e++) {
+                if (test.charAt(i) == numbers.charAt(e)) {
+                    wasNumeric = true;
+                }
+            }
+            if (!wasNumeric) return false;
+        }
+        return true;
+    }
 
     /**
      * @return the hour

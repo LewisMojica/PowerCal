@@ -61,13 +61,14 @@ class Methods {
         System.out.print("Ingrese el nombre del nuevo evento\n"
                 + "> ");
         String name = in.nextLine().trim();
-
+        
         System.out.print("Ingrese la hora del evento formato: <hora>:<minuto>\n"
                 + "> ");
         String test = in.nextLine();
-        while (test.contains(" ")) {
-            System.out.print("Sin espacios en blanco\n"
+        while (!Time.isTime(test)){
+            System.out.print("Formato no permitido. Por favor, ingrese un formato valido: <hora>:<minuto>, sin espacios en blanco\n"
                     + "> ");
+            
             test = in.nextLine();
         }
         Hour hour = stringToHour(test);
@@ -75,7 +76,7 @@ class Methods {
         System.out.print("Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"
                 + "> ");
         test = in.nextLine();
-        while (test.indexOf(" ") != -1) {
+        while (test.contains(" ")) {
             System.out.print("Sin espacios en blanco\n"
                     + "> ");
             test = in.nextLine();
@@ -85,9 +86,11 @@ class Methods {
         System.out.print("Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n"
                 + "> ");
         test = in.nextLine();
-        while (test.indexOf(" ") != -1) {
-            System.out.print("Sin espacios en blanco\n"
-                    + "--> ");
+        
+        while (!Time.isTime(test)) {
+
+            System.out.print("Formato no permitido. Por favor, ingrese un formato valido: <hora>:<minuto>, sin espacios en blanco\n"
+                    + "> ");
             test = in.nextLine();
         }
         Period duration = stringToPeriod(test);
@@ -95,7 +98,7 @@ class Methods {
         //se agrega el nuevo evento al array
         newEvent(name, hour, day, duration);
 
-        System.out.println("Evento < " + name + " >creado");
+        System.out.println("Evento < " + name + " > creado");
 
     }
 
