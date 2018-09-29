@@ -30,7 +30,7 @@ class Methods {
                 + "-->  3. Eliminar evento (no soportado)\n"
                 + "> ");
             String test_err = in.nextLine();
-            while (!isNumeric(test_err)) {
+            while (!isNumeric(test_err) || test_err.isEmpty()) {
                 System.out.println("***Ah introducido caracteres no validos.\n"
                         + "Por favor, lea la lista de opciones y luego escoja una.");
                 System.out.print("> ");
@@ -110,7 +110,7 @@ class Methods {
                     + "-->  2. Ver evento especifico\n"
                     + "> ");
             String test_err = in.nextLine();
-            while (!isNumeric(test_err)) {
+            while (!isNumeric(test_err) || test_err.isEmpty()) {
                 System.out.println("***Ah introducido caracteres no validos.\n"
                         + "Por favor, lea la lista de opciones y luego escoja una.");
                 System.out.print("> ");
