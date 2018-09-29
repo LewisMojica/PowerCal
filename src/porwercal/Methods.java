@@ -8,8 +8,6 @@ package porwercal;
 import java.util.Scanner;
 import event.*;
 import java.util.ArrayList;
-import java.util.Objects;
-import jdk.jfr.EventType;
 
 /**
  *
@@ -27,7 +25,7 @@ class Methods {
                 + "-->  0. Salir\n"
                 + "-->  1. Crear nuevo evento\n"
                 + "-->  2. Ver evento\n"
-                + "-->  3. Eliminar evento (no soportado)\n"
+                + "-->  3. Eliminar evento\n"
                 + "> ");
             String test_err = in.nextLine();
             while (!isNumeric(test_err) || test_err.isEmpty()) {
@@ -67,7 +65,7 @@ class Methods {
         System.out.print("Ingrese la hora del evento formato: <hora>:<minuto>\n"
                 + "> ");
         String test = in.nextLine();
-        while (test.indexOf(" ") != -1) {
+        while (test.contains(" ")) {
             System.out.print("Sin espacios en blanco\n"
                     + "> ");
             test = in.nextLine();
@@ -138,7 +136,21 @@ class Methods {
     }
 
     private static void menuSelection3() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.print("Menu eliminar evento\n"
+                + "Introduce el nombre del evento que deseas borrar\n"
+                + "> ");
+        String name = in.nextLine();
+        boolean exit = false;
+        while (getIndexEventByName(name) == -1 && !exit){
+            System.out.print("El evento < " + name + " > no existe/n"
+                    + "Introducta un nombre validon o escrita < 0 > para salir al menu principal\n"
+                    + "> ");
+            name = in.nextLine();
+            
+            if (name.equals("0")) exit = true;
+        }
+        if (!exit)removeEvent(getIndexEventByName(name)); //si el usuario no a dicho que quiere salir y el evento existe, se elimina el evento solicidado
+        
     }
 
     private static void menuSelection21() {
@@ -198,7 +210,7 @@ class Methods {
 
     //convierte un String del formato day/mes/year a un objeto de tipo Day
     private static Day stringToDay(String next) {
-        int slash_1 = next.indexOf("/"); //ubacar la posicion de la primera ocurrencia del char '/'
+        int slash_1 = next.indexOf("/"); //ubicar la posicion de la primera ocurrencia del char '/'
         int slash_2 = next.indexOf("/", slash_1 + 1);//ubacar la posicion de la segunda ocurrencia del char '/'
         int day = Integer.parseInt(next.substring(0, slash_1));//asigna el dia a la variable Day
         int month = Integer.parseInt(next.substring(slash_1 + 1, slash_2));//asigna el mes a la variable month
@@ -210,6 +222,9 @@ class Methods {
 
         Event evento = new Event(name, hour, day, duration);
         events_array.add(evento);
+    }
+    private static void removeEvent(int index){
+        events_array.remove(index);
     }
 
     private static int getIndexEventByName(String name) {
