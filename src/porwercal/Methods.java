@@ -23,9 +23,22 @@ class Methods {
     static void initMenu() {
         int selection;
         do {
-            printMainMenu();
-            System.out.print("> ");
-            selection = Integer.parseInt(in.nextLine());
+        System.out.print("Opciones principales: \n\n"
+                + "-->  0. Salir\n"
+                + "-->  1. Crear nuevo evento\n"
+                + "-->  2. Ver evento\n"
+                + "-->  3. Eliminar evento (no soportado)\n"
+                + "> ");
+            String test_err = in.nextLine();
+            while (!isNumeric(test_err)) {
+                System.out.println("***Ah introducido caracteres no validos.\n"
+                        + "Por favor, lea la lista de opciones y luego escoja una.");
+                System.out.print("> ");
+                test_err = in.nextLine();
+            }
+
+            selection = Integer.parseInt(test_err);
+
             if (selection != 0) {
                 switch (selection) {
                     case 1:
@@ -38,20 +51,13 @@ class Methods {
                         menuSelection3();
                         break;
                     default:
-                        System.out.println("< " + selection + " > No es una opcion valida\n"
-                                + "------------------------------");
+                        System.out.println("\n*** < " + selection + " > No es una opcion valida\n");
                 }
             }
         } while (selection != 0);
     }
 
-    private static void printMainMenu() {
-        System.out.print("Opciones principales: \n\n"
-                + "-->  0. Salir\n"
-                + "-->  1. Crear nuevo evento\n"
-                + "-->  2. Ver evento\n"
-                + "-->  3. Eliminar evento (no soportado)\n");
-    }
+
 
     private static void menuSelection1() {
         System.out.print("Ingrese el nombre del nuevo evento\n"
@@ -103,7 +109,15 @@ class Methods {
                     + "-->  1. Ver todos los eventos\n"
                     + "-->  2. Ver evento especifico\n"
                     + "> ");
-            selection = Integer.parseInt(in.nextLine());
+            String test_err = in.nextLine();
+            while (!isNumeric(test_err)) {
+                System.out.println("***Ah introducido caracteres no validos.\n"
+                        + "Por favor, lea la lista de opciones y luego escoja una.");
+                System.out.print("> ");
+                test_err = in.nextLine();
+            }
+
+            selection = Integer.parseInt(test_err);
 
             switch (selection) {
                 case 0:
@@ -217,5 +231,18 @@ class Methods {
      */
     private static String getEventInfo(Event get, String event_info_requested) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    private static boolean isNumeric(String test) {
+        String numbers = "0123456789";
+        for (int i = 0; i < test.length(); i++) {
+            boolean wasNumeric = false;
+            for (int e = 0; e < numbers.length(); e++) {
+                if (test.charAt(i) == numbers.charAt(e)) {
+                    wasNumeric = true;
+                }
+            }
+            if (!wasNumeric) return false;
+        }
+        return true;
     }
 }
