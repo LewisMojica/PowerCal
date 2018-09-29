@@ -230,7 +230,21 @@ class Methods {
     * p = duracion
      */
     private static String getEventInfo(Event get, String event_info_requested) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String result = "";
+        boolean n,h,d,p;
+        if(event_info_requested.contains("n")){
+            result = "nombre del evento --> " + get.getName() + "\n";
+        }
+        if(event_info_requested.contains("h")){
+            result += "hora del evento --> " + get.getHour().toStringFormat24() + "\n";
+        }
+        if(event_info_requested.contains("d")){
+            result += "fecha del evento --> " + get.getDay().toString() + "\n";
+        }
+        if(event_info_requested.contains("p")){
+            result += "duracion del evento --> " + get.getDuration().toStringFormat24() + "\n";
+        }
+        return result;
     }
     private static boolean isNumeric(String test) {
         String numbers = "0123456789";
