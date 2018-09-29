@@ -4,7 +4,7 @@ public class Event extends Date {
 
     private String name;
     private Locale locale;
-    Period duration;
+    private Period duration;
 
     public Event(String name, Hour hour, Day day, Period duration) {
         super(hour, day);
@@ -42,6 +42,20 @@ public class Event extends Date {
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
+    }
+
+    /**
+     * @return the duration
+     */
+    public Period getDuration() {
+        return duration;
+    }
+
+    /**
+     * @param duration the duration to set
+     */
+    public void setDuration(Period duration) {
+        this.duration = duration;
     }
 
 }
