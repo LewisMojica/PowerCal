@@ -4,8 +4,7 @@ public class Date {
 
     private Time hour;
     private Day day;
-    private Time duration;
-    private Locale locale;
+    private boolean has_hour, has_day;
 
     /**
      *
@@ -15,6 +14,25 @@ public class Date {
     public Date(Hour hour, Day day) {
         this.hour = hour;
         this.day = day;
+        has_day = true;
+        has_hour = true;
+    }
+    
+    public Date(){
+        has_day = false;
+        has_hour = false;
+    }
+    
+    public Date(Hour hour){
+        this.hour = hour;
+        has_day = false;
+        has_hour = true;
+    }
+    
+    public Date(Day day){
+        this.day = day;
+        has_day = true;
+        has_hour = false;
     }
 
     public Time getHour() {
@@ -26,6 +44,7 @@ public class Date {
      */
     public void setHour(Time hour) {
         this.hour = hour;
+        has_hour = true;
     }
 
     /**
@@ -40,33 +59,20 @@ public class Date {
      */
     public void setDay(Day day) {
         this.day = day;
+        has_day = true;
     }
 
     /**
-     * @return the duration
+     * @return the has_hour
      */
-    public Time getDuration() {
-        return duration;
+    public boolean hasHour() {
+        return has_hour;
     }
 
     /**
-     * @param duration the duration to set
+     * @return the has_day
      */
-    public void setDuration(Time duration) {
-        this.duration = duration;
-    }
-
-    /**
-     * @return the locale
-     */
-    public Locale getLocale() {
-        return locale;
-    }
-
-    /**
-     * @param locale the locale to set
-     */
-    public void setLocale(Locale locale) {
-        this.locale = locale;
+    public boolean hasDay() {
+        return has_day;
     }
 }
