@@ -83,7 +83,7 @@ class Methods {
                     + "> ");                           //
             test = in.nextLine();                      // 
         }
-        Day day = stringToDay(test);//si no hay errores, se crea el objeto Day
+        date.setDay(stringToDay(test));//si no hay errores, se asigna el atributo Day al objeto Date
 
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
                 + "> ");                                                                     //
