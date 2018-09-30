@@ -54,23 +54,28 @@ class Methods {
 
     //funcion de la opcion 1 -> crea nuevo evento
     private static void menuSelection1() {
+        Date date;
         System.out.print("Ingrese el nombre del nuevo evento\n"//se pregunta por el nombre del evento
                 + "> ");                                       //
         String name = in.nextLine().trim();                    //
         
-        System.out.print("Ingrese la hora del evento formato: <hora>:<minuto>\n"//se pregunta por la hora del evento
+        System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la hora del evento formato: <hora>:<minuto>\n"//se pregunta por la hora del evento
                 + "> ");                                                        //
         String test = in.nextLine();                                            //
         
-        while (!Time.isTime(test)){//muestras la "hora" introducida por el usuario contenga errores
+        while (!Time.isTime(test) && !test.equals("")){//mientras la "hora" introducida por el usuario contenga errores y el usuaro no haya pulsado enter
             System.out.print("Formato no permitido. Por favor, ingrese un formato valido:"//
                     + " <hora>:<minuto>, sin espacios en blanco\n"//se imprime
                     + "> ");                                      //un mensage de alerta,
             test = in.nextLine();                                 //y se pregunta nuevamente por una hora.
-        }                                                         //si no hay errores, se crea el objeto hora
-        Hour hour = stringToHour(test);                           //que sera asignado al nuevo evento
-                                                                  
-        System.out.print("Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
+        }                                                         
+        if(test.equals("")) {       //si el usuario ha pulsado enter,
+            date = new Date();      //se crea objeto Date, pero sin asignar sus atributos
+            System.out.print("La hora no ha sido asignada");
+        }
+        else{date = new Date(stringToHour(test));}      //si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
+
+        System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
                 + "> ");
         test = in.nextLine();
         while (test.contains(" ")) {                   //mientras la fecha dada tenga errores, se imprime un mensaje de alerta, y se vuelve a
@@ -80,7 +85,7 @@ class Methods {
         }
         Day day = stringToDay(test);//si no hay errores, se crea el objeto Day
 
-        System.out.print("Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
+        System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
                 + "> ");                                                                     //
         test = in.nextLine();                                                                //
         
@@ -93,7 +98,7 @@ class Methods {
         Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
 
         //se agrega el nuevo evento al array
-        newEvent(name, hour, day, duration);
+        newEvent(name, date, duration);
 
         System.out.println("Evento < " + name + " > creado"); //se notifica de que el evento fue creado
     }
@@ -228,8 +233,8 @@ class Methods {
     }
 
     //crea nuevo evento a partir de los atributos dados
-    private static void newEvent(String name, Hour hour, Day day, Period duration) {
-        Event evento = new Event(name, hour, day, duration);
+    private static void newEvent(String name, Date date, Period duration) {
+        Event evento = new Event(name, date, duration);
         events_array.add(evento);
     }
     
@@ -263,16 +268,17 @@ class Methods {
             result = "nombre del evento --> " + get.getName() + "\n";
         }
         if(event_info_requested.contains("h")){
-            result += "hora del evento --> " + get.getHour().toStringFormat24() + "\n";
+            result += "hora del evento --> " + get.getDate().getHour().toStringFormat24() + "\n";
         }
         if(event_info_requested.contains("d")){
-            result += "fecha del evento --> " + get.getDay().toString() + "\n";
+            result += "fecha del evento --> " + get.getDate().getDay().toString() + "\n";
         }
         if(event_info_requested.contains("p")){
             result += "duracion del evento --> " + get.getDuration().toStringFormat24() + "\n";
         }
         return result;
     }
+    
     private static boolean isNumeric(String test) {
         String numbers = "0123456789";
         for (int i = 0; i < test.length(); i++) {
