@@ -1,22 +1,41 @@
 package event;
 
-public class Event extends Date {
+public class Event{
 
     private String name;
+    private Date date;
     private Locale locale;
     private Period duration;
 
     public Event(String name, Hour hour, Day day, Period duration) {
-        super(hour, day);
         this.name = name;
+        this.date = new Date(hour, day);
         this.duration = duration;
     }
-
-    public Event(String name, Hour hour, Day day, Period duration, Locale locale) {
-        super(hour, day);
+    
+    public Event(String name, Date date, Period duration) {
         this.name = name;
+        this.date = date;
+        this.duration = duration;
+    }
+    
+    public Event(String name, Hour hour, Day day, Period duration, Locale locale) {
+        this.name = name;
+        this.date = new Date(hour, day);
         this.duration = duration;
         this.locale = locale;
+    }
+    
+    public Event(String name,Date date, Period duration, Locale locale) {
+        this.name = name;
+        this.date = date;
+        this.duration = duration;
+        this.locale = locale;
+    }
+    
+    public Event(String name){
+        this.name = name;
+        this.date = new Date();
     }
 
     public String getName() {
@@ -56,6 +75,20 @@ public class Event extends Date {
      */
     public void setDuration(Period duration) {
         this.duration = duration;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
     }
 
 }
