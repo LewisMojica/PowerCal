@@ -13,6 +13,10 @@ public class Time {
         this.hour = hour;
         this.minute = minute;
     }
+    
+    public Time(){
+        
+    }
 
     public String toStringFormat24() {
         String out;    //this var will be return
