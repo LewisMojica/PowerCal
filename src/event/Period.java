@@ -11,8 +11,23 @@ package event;
  */
 public class Period extends Time{
     
+    private boolean is_set;
+    
     public Period(int hour, int minute) {
         super(hour, minute);
+        is_set = true;
+    }
+
+    public Period() {
+        super();
+        is_set = false;
+    }
+
+    /**
+     * @return the is_set
+     */
+    public boolean isSet() {
+        return is_set;
     }
     
 }
