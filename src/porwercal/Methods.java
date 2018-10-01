@@ -71,7 +71,7 @@ class Methods {
         }                                                         
         if(test.equals("")) {       //si el usuario ha pulsado enter,
             date = new Date();      //se crea objeto Date, pero sin asignar sus atributos
-            System.out.print("La hora no ha sido asignada");
+            System.out.println("\nLa hora no ha sido asignada\n");
         }
         else{date = new Date(stringToHour(test));}      //si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
 
@@ -89,14 +89,20 @@ class Methods {
                 + "> ");                                                                     //
         test = in.nextLine();                                                                //
         
-        while (!Time.isTime(test)) { //mientras la duracion dada por el usuario contenga errores, se imprime un mensaje de alerta
+        while (!Time.isTime(test) && !test.equals("")){ //mientras la duracion dada por el usuario contenga errores, se imprime un mensaje de alerta
                                      //y se vuele a preguntar por la duracion
             System.out.print("Formato no permitido. Por favor, ingrese un formato valido: <hora>:<minuto>, sin espacios en blanco\n"//
                     + "> ");//
             test = in.nextLine();//
         }//
-        Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
-
+        
+        Period duration;
+        if (test.equals("")) {
+            duration = new Period();
+            System.out.println("\nLa duracion no ha sido asignada\n");
+        } else {
+            duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
+        }
         //se agrega el nuevo evento al array
         newEvent(name, date, duration);
 
@@ -202,7 +208,7 @@ class Methods {
         index_event = getIndexEventByName(event_name);
 
         System.out.println(event_name + " -- " + event_info_requested); //solo para probar que se recupero el nombre del evento y la info solicitada
-        System.out.print(getEventInfo(events_array.get(index_event), event_info_requested));
+        System.out.println(getEventInfo(events_array.get(index_event), event_info_requested));
     }
 
     //convierte un String del formato hora:minuto a un objeto de tipo Hour
@@ -261,21 +267,27 @@ class Methods {
     * d = dia
     * p = duracion
      */
-    private static String getEventInfo(Event get, String event_info_requested) {
+    private static String getEventInfo(Event event, String event_info_requested) {
         String result = "";
         boolean n,h,d,p;
+        boolean macth = false;
         if(event_info_requested.contains("n")){
-            result = "nombre del evento --> " + get.getName() + "\n";
+            result = "nombre del evento --> " + event.getName() + "\n";
+            macth = true;
         }
         if(event_info_requested.contains("h")){
-            result += "hora del evento --> " + get.getDate().getHour().toStringFormat24() + "\n";
+            result += "hora del evento --> " + event.getDate().getHour().toStringFormat24() + "\n";
+            macth = true;
         }
         if(event_info_requested.contains("d")){
-            result += "fecha del evento --> " + get.getDate().getDay().toString() + "\n";
+            result += "fecha del evento --> " + event.getDate().getDay().toString() + "\n";
+            macth = true;
         }
         if(event_info_requested.contains("p")){
-            result += "duracion del evento --> " + get.getDuration().toStringFormat24() + "\n";
+            result += "duracion del evento --> " + event.getDuration().toStringFormat24();
+            macth = true;
         }
+        if(!macth)result = "**Opciones invalidas\n";
         return result;
     }
     
