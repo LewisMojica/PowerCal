@@ -17,7 +17,8 @@ class Methods {
                 + "-->  0. Salir\n"
                 + "-->  1. Crear nuevo evento\n"
                 + "-->  2. Ver evento\n"
-                + "-->  3. Eliminar evento\n"
+                + "-->  3. Editar evento (not supported yet)\n"
+                + "-->  4. Eliminar evento\n"
                 + "> ");
             String input = in.nextLine(); //'input' almacena el texto que ha introducido el usuario
             while (!isNumeric(input) || input.isEmpty()) {                              //Si el texto de entrada contiene algun error
@@ -35,13 +36,16 @@ class Methods {
                 //se busca a cual opcion corresponde el numero que ha introducido el usuario
                 switch (selection) {
                     case 1:
-                        menuSelection1();
+                        menuSelection1();//Crear nuevo evento
                         break;
                     case 2:
-                        menuSelection2();
+                        menuSelection2();//Ver informacion del evento
                         break;
                     case 3:
-                        menuSelection3();
+                        menuSelection3();//Editar evento
+                        break;
+                    case 4:
+                        menuSelection4();//eliminar evento
                         break;
                     default:
                         //si el numero que el usuario introdujo corresponde a ninguna opcion, se imprime mesaje de alerta y  se comienzar el bucle
@@ -153,7 +157,7 @@ class Methods {
     }
     
     //opcion 3 --> eliminar 
-    private static void menuSelection3() {
+    private static void menuSelection4() {
         System.out.print("Menu eliminar evento\n"
                 + "Introduce el nombre del evento que deseas borrar\n"
                 + "> ");
@@ -324,5 +328,9 @@ class Methods {
             if (!wasNumeric) return false;
         }
         return true;
+    }
+
+    private static void menuSelection3() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
