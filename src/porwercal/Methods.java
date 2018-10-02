@@ -54,7 +54,7 @@ class Methods {
 
     //funcion de la opcion 1 -> crea nuevo evento
     private static void menuSelection1() {
-        Date date;
+        Date date = new Date();
         System.out.print("Ingrese el nombre del nuevo evento\n"//se pregunta por el nombre del evento
                 + "> ");                                       //
         String name = in.nextLine().trim();                    //
@@ -72,10 +72,11 @@ class Methods {
             test = in.nextLine();                                 //y se pregunta nuevamente por una hora.
         }                                                         
         if(test.equals("")) {       //si el usuario ha pulsado enter,
-            date = new Date();      //se crea objeto Date, pero sin asignar sus atributos
             System.out.println("\nLa hora no ha sido asignada\n");
         }
-        else{date =new Date(stringToHour(test));}      //si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
+        else{
+            date = new Date(stringToHour(test));//si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
+        }      
 
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
                 + "> ");
@@ -86,7 +87,6 @@ class Methods {
             test = in.nextLine();                      // 
         }
         date.setDay(stringToDay(test));//si no hay errores, se asigna el atributo Day al objeto Date
-
         event.setDate(date);
         
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
@@ -100,13 +100,11 @@ class Methods {
             test = in.nextLine();//
         }//
         
-        Period duration;
         if (test.equals("")) {
-            duration = new Period();
             System.out.println("\nLa duracion no ha sido asignada\n");
         } else {
-            duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
-            event.setDuration(duration);
+            Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
+            event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
         }
         //se agrega el nuevo evento al array
         addNewEvent(event);
