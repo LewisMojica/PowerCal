@@ -286,9 +286,13 @@ class Methods {
             result = "nombre del evento --> " + event.getName() + "\n";
             macth = true;
         }
-        if(event_info_requested.contains("h")){
-            result += "hora del evento --> " + event.getDate().getHour().toStringFormat24() + "\n";
+        if (event_info_requested.contains("h")) {
             macth = true;
+            if (event.getDate().hasHour()) {
+                result += "hora del evento --> " + event.getDate().getHour().toStringFormat24() + "\n";
+            } else {
+                result += "hora del evento --> no asignada\n";
+            }
         }
         if(event_info_requested.contains("d")){
             result += "fecha del evento --> " + event.getDate().getDay().toString() + "\n";
