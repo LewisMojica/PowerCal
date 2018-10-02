@@ -59,6 +59,8 @@ class Methods {
                 + "> ");                                       //
         String name = in.nextLine().trim();                    //
         
+        Event event = new Event(name);
+        
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la hora del evento formato: <hora>:<minuto>\n"//se pregunta por la hora del evento
                 + "> ");                                                        //
         String test = in.nextLine();                                            //
@@ -73,7 +75,7 @@ class Methods {
             date = new Date();      //se crea objeto Date, pero sin asignar sus atributos
             System.out.println("\nLa hora no ha sido asignada\n");
         }
-        else{date = new Date(stringToHour(test));}      //si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
+        else{date =new Date(stringToHour(test));}      //si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
 
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
                 + "> ");
@@ -85,6 +87,8 @@ class Methods {
         }
         date.setDay(stringToDay(test));//si no hay errores, se asigna el atributo Day al objeto Date
 
+        event.setDate(date);
+        
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
                 + "> ");                                                                     //
         test = in.nextLine();                                                                //
@@ -102,9 +106,10 @@ class Methods {
             System.out.println("\nLa duracion no ha sido asignada\n");
         } else {
             duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
+            event.setDuration(duration);
         }
         //se agrega el nuevo evento al array
-        newEvent(name, date, duration);
+        addNewEvent(event);
 
         System.out.println("Evento < " + name + " > creado"); //se notifica de que el evento fue creado
     }
@@ -244,6 +249,15 @@ class Methods {
         events_array.add(evento);
     }
     
+    private static void newEvent(String name) {
+        Event evento = new Event(name);
+        events_array.add(evento);
+    }
+    
+    public static void addNewEvent(Event event){
+        events_array.add(event);
+    }
+    
     //elimina evento a partir de index dado
     private static void removeEvent(int index){
         events_array.remove(index);
@@ -269,7 +283,6 @@ class Methods {
      */
     private static String getEventInfo(Event event, String event_info_requested) {
         String result = "";
-        boolean n,h,d,p;
         boolean macth = false;
         if(event_info_requested.contains("n")){
             result = "nombre del evento --> " + event.getName() + "\n";
