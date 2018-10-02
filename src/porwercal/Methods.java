@@ -101,6 +101,8 @@ class Methods {
         }//
         
         if (test.equals("")) {
+            Period duration = new Period();//sin no hay errores, se crea el objeto de tipo Periodo
+            event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
             System.out.println("\nLa duracion no ha sido asignada\n");
         } else {
             Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
@@ -299,15 +301,19 @@ class Methods {
             macth = true;
         }
         if(event_info_requested.contains("p")){
-            result += "duracion del evento --> " + event.getDuration().toStringFormat24();
             macth = true;
+            if (event.getDuration().isSet()) {
+                result += "duracion del evento --> " + event.getDuration().toStringFormat24();
+            } else{
+                result += "duracion del evento --> no asignado";
+            }
         }
         if(!macth)result = "**Opciones invalidas\n";
         return result;
     }
     
     private static boolean isNumeric(String test) {
-        String numbers = "0123456789";
+        final String numbers = "0123456789";
         for (int i = 0; i < test.length(); i++) {
             boolean wasNumeric = false;
             for (int e = 0; e < numbers.length(); e++) {
