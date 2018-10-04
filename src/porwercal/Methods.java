@@ -85,11 +85,11 @@ class Methods {
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
                 + "> ");
         test = in.nextLine();
-        while (!test.equals("") && Day.isDay(test)) {                   //mientras la fecha dada tenga errores, se imprime un mensaje de alerta, y se vuelve a
+        while (!test.equals("") && !Day.isDay(test)) {                   //mientras la fecha dada tenga errores, se imprime un mensaje de alerta, y se vuelve a
             System.out.print("Formato no permitido. Por favor, ingrese un formato valido\n"
-                    + "<day>/<month>/<year>\n"// preguntar por la fecha
+                    + "<day>/<month>/<year>\n"
                     + "> ");                           //
-            test = in.nextLine();                      // 
+            test = in.nextLine();                      // preguntar por la fecha 
         }
         if (test.equals("")) {
             
@@ -308,8 +308,13 @@ class Methods {
             }
         }
         if(event_info_requested.contains("d")){
-            result += "fecha del evento --> " + event.getDate().getDay().toString() + "\n";
             macth = true;
+            if (event.getDate().hasDay()) {
+                result += "fecha del evento --> " + event.getDate().getDay().toString() + "\n";
+            }
+            else{
+                result += "dia del evento --> no asignado";
+            }
         }
         if(event_info_requested.contains("p")){
             macth = true;
