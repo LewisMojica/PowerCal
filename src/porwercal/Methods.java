@@ -70,7 +70,7 @@ class Methods {
         String test = in.nextLine();                                            //
         
         while (!Time.isTime(test) && !test.equals("")){//mientras la "hora" introducida por el usuario contenga errores y el usuaro no haya pulsado enter
-            System.out.print("Formato no permitido. Por favor, ingrese un formato valido:"//
+            System.out.print("Formato no permitido. Por favor, ingrese un formato valido:\n"//
                     + " <hora>:<minuto>, sin espacios en blanco\n"//se imprime
                     + "> ");                                      //un mensage de alerta,
             test = in.nextLine();                                 //y se pregunta nuevamente por una hora.
@@ -85,14 +85,21 @@ class Methods {
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
                 + "> ");
         test = in.nextLine();
-        while (test.contains(" ")) {                   //mientras la fecha dada tenga errores, se imprime un mensaje de alerta, y se vuelve a
-            System.out.print("Sin espacios en blanco\n"// preguntar por la fecha
+        while (!test.equals("") && Day.isDay(test)) {                   //mientras la fecha dada tenga errores, se imprime un mensaje de alerta, y se vuelve a
+            System.out.print("Formato no permitido. Por favor, ingrese un formato valido\n"
+                    + "<day>/<month>/<year>\n"// preguntar por la fecha
                     + "> ");                           //
             test = in.nextLine();                      // 
         }
-        date.setDay(stringToDay(test));//si no hay errores, se asigna el atributo Day al objeto Date
-        event.setDate(date);
-        
+        if (test.equals("")) {
+            
+            date.setDay(new Day());
+            event.setDate(date);
+            System.out.println("\nFecha no asignada\n");
+        } else {
+            date.setDay(stringToDay(test));//si no hay errores y  no se ha pulsado enter, se asigna el atributo Day al objeto Date
+            event.setDate(date);
+        }
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
                 + "> ");                                                                     //
         test = in.nextLine();                                                                //
