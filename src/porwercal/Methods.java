@@ -113,29 +113,32 @@ class Methods {
                         date.setDay(stringToDay(test));//si no hay errores y  no se ha pulsado enter, se asigna el atributo Day al objeto Date
                         event.setDate(date);
                     }
-                    System.out.print("(pulse enter para dejar la duracion sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
+                    System.out.print("(pulse enter para dejar la duracion sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n"
+                            + "(ingrese \"...\" para cancelar la creacion de este evento)\n" //se pregunta por la duracion del evento
                             + "> ");                                                                     //
                     test = in.nextLine();                                                                //
 
-                    while (!Time.isTime(test) && !test.equals("")) { //mientras la duracion dada por el usuario contenga errores, se imprime un mensaje de alerta
+                    while (!Time.isTime(test) && !test.equals("") && !test.equals("...")) { //mientras la duracion dada por el usuario contenga errores, se imprime un mensaje de alerta
                         //y se vuele a preguntar por la duracion
                         System.out.print("Formato no permitido. Por favor, ingrese un formato valido: <hora>:<minuto>, sin espacios en blanco\n"//
                                 + "> ");//
                         test = in.nextLine();//
                     }//
+                    
+                    if (!test.equals("...")) {
+                        if (test.equals("")) {
+                            Period duration = new Period();//sin no hay errores, se crea el objeto de tipo Periodo
+                            event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
+                            System.out.println("\nLa duracion no ha sido asignada\n");
+                        } else {
+                            Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
+                            event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
+                        }
+                        //se agrega el nuevo evento al array
+                        addNewEvent(event);
 
-                    if (test.equals("")) {
-                        Period duration = new Period();//sin no hay errores, se crea el objeto de tipo Periodo
-                        event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
-                        System.out.println("\nLa duracion no ha sido asignada\n");
-                    } else {
-                        Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
-                        event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
+                        System.out.println("Evento < " + name + " > creado"); //se notifica de que el evento fue creado
                     }
-                    //se agrega el nuevo evento al array
-                    addNewEvent(event);
-
-                    System.out.println("Evento < " + name + " > creado"); //se notifica de que el evento fue creado
                 }
             }
         }
