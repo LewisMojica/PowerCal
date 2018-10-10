@@ -60,82 +60,81 @@ class Methods {
     private static void menuSelection1() {
         Date date = new Date();
         boolean quit = false;
-        System.out.print("Ingrese el nombre del nuevo evento (ingrese \"...\" para cancelar la creacion de este evento)\n"//se pregunta por el nombre del evento
+        System.out.print("Ingrese el nombre del nuevo evento\n"
+                + "(ingrese \"...\" para cancelar la creacion de este evento)\n"//se pregunta por el nombre del evento
                 + "> ");                                       //
         String name = in.nextLine().trim();                    //
-        
-        if(name.equals("...")) quit = true;
-        
-        while ("".equals(name) && !quit){
-            System.out.print("Para crear un evento debe especificar su nombre (ingrese \"...\" para cancelar la creacion de este evento)\n"
+
+        while ("".equals(name) && !name.equals("...")) {
+            System.out.print("Para crear un evento debe especificar su nombre\n"
+                    + "(ingrese \"...\" para cancelar la creacion de este evento)\n"
                     + "Ingrese el nombre del nuevo evento\n"
                     + "> ");
             name = in.nextLine().trim();
-            if(name.equals("...")){
-                quit = true;
+        }
+        if (!name.equals("...")) {
+            Event event = new Event(name);
+
+            System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la hora del evento formato: <hora>:<minuto>\n"
+                    + "(ingrese \"...\" para cancelar la creacion de este evento)\n"//se pregunta por la hora del evento
+                    + "> ");                                                        //
+            String test = in.nextLine();                                            //
+
+            while (!Time.isTime(test) && !test.equals("") && !"...".equals(test)) {//mientras la "hora" introducida por el usuario contenga errores y el usuaro no haya pulsado enter
+                System.out.print("Formato no permitido. Por favor, ingrese un formato valido:\n"//
+                        + " <hora>:<minuto>, sin espacios en blanco\n"//se imprime
+                        + "> ");                                      //un mensage de alerta,
+                test = in.nextLine();                                 //y se pregunta nuevamente por una hora.
             }
-        }
-        if (!quit){
-        Event event = new Event(name);
-
-        System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la hora del evento formato: <hora>:<minuto>\n"//se pregunta por la hora del evento
-                + "> ");                                                        //
-        String test = in.nextLine();                                            //
-        
-        while (!Time.isTime(test) && !test.equals("")){//mientras la "hora" introducida por el usuario contenga errores y el usuaro no haya pulsado enter
-            System.out.print("Formato no permitido. Por favor, ingrese un formato valido:\n"//
-                    + " <hora>:<minuto>, sin espacios en blanco\n"//se imprime
-                    + "> ");                                      //un mensage de alerta,
-            test = in.nextLine();                                 //y se pregunta nuevamente por una hora.
-        }                                                         
-        if(test.equals("")) {       //si el usuario ha pulsado enter,
-            System.out.println("\nLa hora no ha sido asignada\n");
-        }
-        else{
-            date = new Date(stringToHour(test));//si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
-        }      
-
-        System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
-                + "> ");
-        test = in.nextLine();
-        while (!test.equals("") && !Day.isDay(test)) {                   //mientras la fecha dada tenga errores, se imprime un mensaje de alerta, y se vuelve a
-            System.out.print("Formato no permitido. Por favor, ingrese un formato valido\n"
-                    + "<day>/<month>/<year>\n"
-                    + "> ");                           //
-            test = in.nextLine();                      // preguntar por la fecha 
-        }
-        if (test.equals("")) {
             
-            date.setDay(new Day());
-            event.setDate(date);
-            System.out.println("\nFecha no asignada\n");
-        } else {
-            date.setDay(stringToDay(test));//si no hay errores y  no se ha pulsado enter, se asigna el atributo Day al objeto Date
-            event.setDate(date);
-        }
-        System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
-                + "> ");                                                                     //
-        test = in.nextLine();                                                                //
-        
-        while (!Time.isTime(test) && !test.equals("")){ //mientras la duracion dada por el usuario contenga errores, se imprime un mensaje de alerta
-                                     //y se vuele a preguntar por la duracion
-            System.out.print("Formato no permitido. Por favor, ingrese un formato valido: <hora>:<minuto>, sin espacios en blanco\n"//
-                    + "> ");//
-            test = in.nextLine();//
-        }//
-        
-        if (test.equals("")) {
-            Period duration = new Period();//sin no hay errores, se crea el objeto de tipo Periodo
-            event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
-            System.out.println("\nLa duracion no ha sido asignada\n");
-        } else {
-            Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
-            event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
-        }
-        //se agrega el nuevo evento al array
-        addNewEvent(event);
+            if (!test.equals("...")) {
+                if (test.equals("")) {       //si el usuario ha pulsado enter,
+                    System.out.println("\nLa hora no ha sido asignada\n");
+                } else {
+                    date = new Date(stringToHour(test));//si no, cre crea nuevo objeto de tipo Date con sus atributos definidos
+                }
+                System.out.print("(pulse enter para dejar la fecha sin asignar) Ingrese la fecha del nuevo evento formato: <day>/<month>/<year>\n"//se pregunta por la fecha
+                        + "> ");
+                test = in.nextLine();
+                while (!test.equals("") && !Day.isDay(test)) {                   //mientras la fecha dada tenga errores, se imprime un mensaje de alerta, y se vuelve a
+                    System.out.print("Formato no permitido. Por favor, ingrese un formato valido\n"
+                            + "<day>/<month>/<year>\n"
+                            + "> ");                           //
+                    test = in.nextLine();                      // preguntar por la fecha 
+                }
+                if (test.equals("")) {
 
-        System.out.println("Evento < " + name + " > creado"); //se notifica de que el evento fue creado
+                    date.setDay(new Day());
+                    event.setDate(date);
+                    System.out.println("\nFecha no asignada\n");
+                } else {
+                    date.setDay(stringToDay(test));//si no hay errores y  no se ha pulsado enter, se asigna el atributo Day al objeto Date
+                    event.setDate(date);
+                }
+                System.out.print("(pulse enter para dejar la duracion sin asignar) Ingrese la duracion del nuevo evento formato: <horas>:<minutos>\n" //se pregunta por la duracion del evento
+                        + "> ");                                                                     //
+                test = in.nextLine();                                                                //
+
+                while (!Time.isTime(test) && !test.equals("")) { //mientras la duracion dada por el usuario contenga errores, se imprime un mensaje de alerta
+                    //y se vuele a preguntar por la duracion
+                    System.out.print("Formato no permitido. Por favor, ingrese un formato valido: <hora>:<minuto>, sin espacios en blanco\n"//
+                            + "> ");//
+                    test = in.nextLine();//
+                }//
+
+                if (test.equals("")) {
+                    Period duration = new Period();//sin no hay errores, se crea el objeto de tipo Periodo
+                    event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
+                    System.out.println("\nLa duracion no ha sido asignada\n");
+                } else {
+                    Period duration = stringToPeriod(test);//sin no hay errores, se crea el objeto de tipo Periodo
+                    event.setDuration(duration);//y se asigna la duracion al evento que se va a crear
+                }
+                //se agrega el nuevo evento al array
+                addNewEvent(event);
+
+                System.out.println("Evento < " + name + " > creado"); //se notifica de que el evento fue creado
+            }
         }
     }
     
