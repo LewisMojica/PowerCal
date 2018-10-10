@@ -59,12 +59,25 @@ class Methods {
     //funcion de la opcion 1 -> crea nuevo evento
     private static void menuSelection1() {
         Date date = new Date();
-        System.out.print("Ingrese el nombre del nuevo evento\n"//se pregunta por el nombre del evento
+        boolean quit = false;
+        System.out.print("Ingrese el nombre del nuevo evento (ingrese \"...\" para cancelar la creacion de este evento)\n"//se pregunta por el nombre del evento
                 + "> ");                                       //
         String name = in.nextLine().trim();                    //
         
-        Event event = new Event(name);
+        if(name.equals("...")) quit = true;
         
+        while ("".equals(name) && !quit){
+            System.out.print("Para crear un evento debe especificar su nombre (ingrese \"...\" para cancelar la creacion de este evento)\n"
+                    + "Ingrese el nombre del nuevo evento\n"
+                    + "> ");
+            name = in.nextLine().trim();
+            if(name.equals("...")){
+                quit = true;
+            }
+        }
+        if (!quit){
+        Event event = new Event(name);
+
         System.out.print("(pulse enter para dejar la hora sin asignar) Ingrese la hora del evento formato: <hora>:<minuto>\n"//se pregunta por la hora del evento
                 + "> ");                                                        //
         String test = in.nextLine();                                            //
@@ -123,6 +136,7 @@ class Methods {
         addNewEvent(event);
 
         System.out.println("Evento < " + name + " > creado"); //se notifica de que el evento fue creado
+        }
     }
     
     //Opcion 2 --> visualizar eventos
