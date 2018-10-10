@@ -199,7 +199,7 @@ class Methods {
         System.out.print("Ingresa el nombre del evento seguido de un '-' y la informacion que deseas visualizar\n"
                 + "Ecribe <*help> para ver la diferentes informaciones que se pueden visualizar\n"
                 + "> ");
-        String input, event_name, event_info_requested;
+        String input, event_name, event_info_requested = "";
         int tag_index; //porsicion del char '-' en el String input
         int index_event;
         do {
@@ -216,15 +216,21 @@ class Methods {
         } while (input.equals("*help"));
 
         tag_index = input.indexOf("-"); //buscamos la posicion del char '_'
-
+        
+        if(tag_index != -1){
         event_name = input.substring(0, tag_index).trim(); //extraemos el nombre del evento y lo asignamos a su variable correspondiente
 
         event_info_requested = input.substring(tag_index + 1).trim();
 
         index_event = getIndexEventByName(event_name);
-
-        System.out.println(event_name + " -- " + event_info_requested); //solo para probar que se recupero el nombre del evento y la info solicitada
-        System.out.println(getEventInfo(events_array.get(index_event), event_info_requested));
+        } else{
+            index_event = getIndexEventByName(input);
+        }
+        if (index_event == -1) {
+            System.out.println("Evento no existente");
+        } else {
+            System.out.println(getEventInfo(events_array.get(index_event), event_info_requested));
+        }
     }
 
     //convierte un String del formato hora:minuto a un objeto de tipo Hour
@@ -324,7 +330,10 @@ class Methods {
                 result += "duracion del evento --> no asignado";
             }
         }
-        if(!macth)result = "**Opciones invalidas\n";
+        if(!macth && event_info_requested != ""){
+        result = "**Opciones invalidas\n";
+        return result;
+        }
         return result;
     }
     
