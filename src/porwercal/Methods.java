@@ -17,7 +17,7 @@ class Methods {
                 + "-->  0. Salir\n"
                 + "-->  1. Crear nuevo evento\n"
                 + "-->  2. Ver evento\n"
-                + "-->  3. Editar evento (not supported yet)\n"
+                + "-->  3. Editar evento (partially supported)\n"
                 + "-->  4. Eliminar evento\n"
                 + "> ");
             String input = in.nextLine(); //'input' almacena el texto que ha introducido el usuario
@@ -181,8 +181,74 @@ class Methods {
             }
         } while (selection != 0); //si el texto de entrada es igual a '0' se sale hacia el menu principal
     }
+
+    // opcion 3 --> editar evento
+    private static void menuSelection3() {
+        Event event = new Event();
+        boolean exit = false;
+        System.out.print("Ingrese el nombre del evento que desea editar\n"
+                + "> ");
+        String input = in.nextLine();//se verifica que el evento existe
+        if (input.equals("...")) exit = true;
+        while (getIndexEventByName(input) == -1 && !exit) {
+            System.out.print("Evento inexistente. Ingrese un nombre valido (ingrese \"...\" para salir al menu principal)\n"
+                    + "> ");
+            input = in.nextLine();
+            if (input.equals("...")) exit = true;
+        }
+        if(!exit){ 
+            event = events_array.get(getIndexEventByName(input));
+                        System.out.print("Editando evento < " + input + " >\n"
+                    + "n = nombre\n"
+                    + "h = hora\n"
+                    + "d = dia\n"
+                    + "p = duracion\n");
+        }
+        
+        while (!exit){
+            System.out.print("Ingrese el parametro que desea editar.\n"
+                    + "> ");
+            input = in.nextLine();
+            
+            switch(input){
+                case "n":
+                    System.out.print("Ingrese el nombre que desea asignar al evento\n"
+                            + "(ingrese \"...\" para cancelar la creacion de este evento)\n"
+                            + "> ");
+                    String name = in.nextLine();
+                    if (name.equals("..."))exit = true;
+                    while (name.trim().equals("") && !name.equals("...") && getIndexEventByName(name) != -1 && !exit){
+                        System.out.print("nombre no permitido, ");
+                        if (getIndexEventByName(name) == -1){
+                            System.out.print("el nombre que se intenta asignar ya esta en uso\n\n");
+                        } else{
+                            System.out.print("\n\n");
+                        }
+                        
+                        System.out.print("Ingrese el nombre que desea asignar al evento\n"
+                            + "(ingrese \"...\" para cancelar la creacion de este evento)\n"
+                            + "> ");
+                        name = in.nextLine();
+                        if (name.equals("..."))exit = true;
+                    }
+                    if (!exit){
+                        event.setName(name);
+                    }
+                    break;
+                case "h":
+                    break;
+                case "d":
+                    break;
+                case "p":
+                    break;
+                case "...":
+                    exit = true;
+                    break;
+            }
+        }
+    }
     
-    //opcion 3 --> eliminar 
+    //opcion 4 --> eliminar 
     private static void menuSelection4() {
         System.out.print("Menu eliminar evento\n"
                 + "Introduce el nombre del evento que deseas borrar\n"
@@ -365,12 +431,10 @@ class Methods {
                     wasNumeric = true;
                 }
             }
-            if (!wasNumeric) return false;
+            if (!wasNumeric) {
+                return false;
+            }
         }
         return true;
-    }
-
-    private static void menuSelection3() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
