@@ -37,6 +37,9 @@ public class Event{
         this.name = name;
         this.date = new Date();
     }
+    public Event(){
+        
+    }
 
     public String getName() {
         return this.name;
