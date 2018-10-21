@@ -206,7 +206,7 @@ class Methods {
         }
         
         while (!exit){
-            System.out.print("Ingrese el parametro que desea editar.\n"
+            System.out.print("Ingrese el parametro que desea editar (ingrese \"...\" para salir al menu principal).\n"
                     + "> ");
             input = in.nextLine();
             
@@ -236,6 +236,24 @@ class Methods {
                     }
                     break;
                 case "h":
+                    System.out.print("Ingrese la hora que desea asignar al evento -- formato: <hora>:<minuto>\n"
+                            + "(ingrese \"...\" para dejar de editar el evento)\n"
+                            + "> ");
+                    input = in.nextLine();
+                    if (input.equals("...")) exit = true;
+                    
+                    while (!Hour.isTime(input) && !exit){
+                        System.out.print("Ha introducido una hora no valida\n"
+                                + "(ingrese \"...\" para dejar de editar el evento)\n"
+                                + "> ");
+                        input = in.nextLine();
+                        if (input.equals("...")) exit = true;
+                    }
+                    if (!exit){
+                        Date date = event.getDate();
+                        date.setHour(stringToHour(input));
+                        event.setDate(date);
+                    }
                     break;
                 case "d":
                     break;
