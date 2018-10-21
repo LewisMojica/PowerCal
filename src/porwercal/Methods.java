@@ -256,6 +256,26 @@ class Methods {
                     }
                     break;
                 case "d":
+                    System.out.print("Ingrese el dia que desea asignar al evento -- formato: <day>/<month>/<year>\n"
+                            + "(ingrese \"...\" para dejar de editar el evento)\n"
+                            + "> ");
+                    input = in.nextLine();
+                    if (input.equals("..."))exit = true;
+
+                    while (!Day.isDay(input) && !exit) {
+                        System.out.print("Ha introducido una fecha no valida\n"
+                                + "(ingrese \"...\" para dejar de editar el evento)\n"
+                                + "> ");
+                        input = in.nextLine();
+                        if (input.equals("...")) {
+                            exit = true;
+                        }
+                    }
+                    if (!exit) {
+                        Date date = event.getDate();
+                        date.setDay(stringToDay(input));
+                        event.setDate(date);
+                    }
                     break;
                 case "p":
                     break;
