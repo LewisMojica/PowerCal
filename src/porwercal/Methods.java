@@ -17,7 +17,7 @@ class Methods {
                 + "-->  0. Salir\n"
                 + "-->  1. Crear nuevo evento\n"
                 + "-->  2. Ver evento\n"
-                + "-->  3. Editar evento (partially supported)\n"
+                + "-->  3. Editar evento\n"
                 + "-->  4. Eliminar evento\n"
                 + "> ");
             String input = in.nextLine(); //'input' almacena el texto que ha introducido el usuario
@@ -278,6 +278,22 @@ class Methods {
                     }
                     break;
                 case "p":
+                    System.out.print("Ingrese la diracion que desea asignar al evento -- formato: <horas>:<minutos>\n"
+                            + "(ingrese \"...\" para dejar de editar el evento)\n"
+                            + "> ");
+                    input = in.nextLine();
+                    if (input.equals("...")) exit = true;
+                    
+                    while (!Period.isTime(input) && !exit){
+                        System.out.print("Ha introducido una hora no valida\n"
+                                + "(ingrese \"...\" para dejar de editar el evento)\n"
+                                + "> ");
+                        input = in.nextLine();
+                        if (input.equals("...")) exit = true;
+                    }
+                    if (!exit){
+                        event.setDuration(stringToPeriod(input));
+                    }
                     break;
                 case "...":
                     exit = true;
